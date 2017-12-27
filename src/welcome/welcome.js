@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
+import ReactDOM from 'react-dom';
 import FacebookLogin from 'react-facebook-login';
+import GitHubLogin from 'react-github-login';
 import "./welcome.css";
 import {PostData} from "../service/PostData.js";
 import {Redirect} from 'react-router-dom';
@@ -35,6 +37,7 @@ class Welcome extends Component {
 				provider_pic: res.w3.Paa
 			}
 		}
+		
 		PostData('signup',this.state).then((result) => {
 			let responseJson = result;
 			if(responseJson.userData){
@@ -55,6 +58,12 @@ class Welcome extends Component {
 			console.log(response);
 			this.signup(response, 'google')
 		}
+
+		const responseGithub = response => {
+			console.log(response);
+			console.error(response);
+			// this.signup(response, 'github')
+		}
 		return (
 			<div className="row" id="Body">
 				<div className="medium-12 columns">
@@ -67,11 +76,19 @@ class Welcome extends Component {
 					<FacebookLogin
 						appId="1792468211053117"
 						autoLoad={true}
-						field="name,email, picture"
+						field="name, email, picture"
 						onClick={responseFacebook}
 						callback={responseFacebook}
 					/>
 
+					<GitHubLogin 
+						clientId="4ea83a6419765ad541ac"
+						// clientSecret="0ed6be02055077749f68d1f55b4e0cc37739a646"
+						redirectUri="" 
+						onSuccess={responseGithub}
+						onFailure={responseGithub}
+						/>
+					);
 					<a href="signup" className="button success"> Signup </a>
 				</div>
 			</div>
