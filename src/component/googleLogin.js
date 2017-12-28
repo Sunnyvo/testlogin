@@ -5,7 +5,7 @@ class GoogleLogin extends Component{
 	render(){
 		return(
 	
-				<Button isColor='danger'>
+				<Button isColor='danger' style={{width:100}}>
 					Gmail
 				</Button>
 

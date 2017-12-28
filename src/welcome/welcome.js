@@ -16,6 +16,10 @@ class Welcome extends Component {
 			redirectToReferrer: false
 		}
 		this.signup = this.signup.bind(this);
+		this.responseFacebook = this.responseFacebook.bind(this);
+		this.responseGithub = this.responseGithub.bind(this);
+		this.responseGoogle = this.responseGoogle.bind(this); 
+		// this.facebookLogin = this.facebookLogin.bind(this);
 	}
 
 	signup(res, type) {
@@ -49,24 +53,28 @@ class Welcome extends Component {
 			}
 		})
 	}
+
+
+	responseFacebook = (response) => {
+		console.log("response for facebook")
+		console.log(response);
+		this.signup(response, 'facebook')
+	}
+	responseGoogle = response => {
+		console.log(response);
+		this.signup(response, 'google')
+	}
+
+	responseGithub = response => {
+		console.log(response);
+		console.error(response);
+		// this.signup(response, 'github')
+	}
 	render() {
 		if (this.state.redirectToReferrer) {
 			return <Redirect to={'http://localhost:3000/'} />
 		}
-		const responseFacebook = (response) => {
-			console.log(response);
-			this.signup(response, 'facebook')
-		}
-		const responseGoogle = response => {
-			console.log(response);
-			this.signup(response, 'google')
-		}
-
-		const responseGithub = response => {
-			console.log(response);
-			console.error(response);
-			// this.signup(response, 'github')
-		}
+		
 		return (
 			<div>
 				<Section isSize='small' isBold>
@@ -117,12 +125,8 @@ class Welcome extends Component {
 												// appId="1792468211053117"
 												// autoLoad={true}
 												// field="name, email, picture"
-												// onClick={responseFacebook}
+												responseFacebook = {this.responseFacebook}
 												// callback={responseFacebook}
-												// cssClass="my-facebook-button-class"
-												// icon="fa-facebook"
-												// textButton ="Facebook"
-												// width= "100%"
 											/>
 										</Column>	
 									</Columns>
@@ -131,9 +135,6 @@ class Welcome extends Component {
 						</Columns>
 					</Container>
 				</Section>
-
-				);
-					<a href="signup" className="button success"> Signup </a>
 			</div>
 		)
 	}

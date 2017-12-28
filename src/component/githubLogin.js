@@ -5,7 +5,7 @@ class GitHubLogin extends Component{
 	render(){
 		return(
 	
-				<Button isColor='dark'>
+				<Button isColor='dark' style={{width:100}}>
 					Github
 				</Button>
 
